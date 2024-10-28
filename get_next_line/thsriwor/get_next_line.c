@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <fcntl.h>
 
 static char	*set_line(char *line_buffer)
 {
@@ -99,16 +100,19 @@ char	*get_next_line(int fd)
 	left_c = set_line(line);
 	return (line);
 }
+
 // int	main()
 // {
-// 	int	fd;
+// 	int	fd, fd2;
 // 	char	*line;
 
-// 	fd = open("get_next_line.h", O_RDONLY);
+// 	fd = open("test.c", O_RDONLY);
+// 	fd2 = open("test1.c", O_RDONLY);
 // 	int	i = 1;
 // 	while (i < 33)
 // 	{
-// 		line = get_next_line(fd);
+// 		line = get_next_line(fd);printf("%d | %s", i, line);
+// 		line = get_next_line(fd2);
 // 		printf("%d | %s", i, line);
 // 		free(line);
 // 		i++;
