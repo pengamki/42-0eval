@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putlchar.c                                      :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bworrawa <bworrawa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/29 15:16:10 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/28 15:49:35 by pengamki         ###   ########.fr       */
+/*   Created: 2024/08/26 10:43:36 by bworrawa          #+#    #+#             */
+/*   Updated: 2024/10/20 15:56:45 by bworrawa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-int	ft_putlchar(int c)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	return (write(1, &c, 1));
+	t_list	*cur;
+	t_list	*temp;
+
+	if (lst && *lst)
+	{
+		cur = (t_list *)*lst;
+		while (cur)
+		{
+			temp = cur->next;
+			ft_lstdelone(cur, del);
+			cur = temp;
+		}
+		*lst = NULL;
+	}
 }

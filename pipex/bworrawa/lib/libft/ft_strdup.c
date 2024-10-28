@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putlchar.c                                      :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bworrawa <bworrawa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/29 15:16:10 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/28 15:49:35 by pengamki         ###   ########.fr       */
+/*   Created: 2024/08/26 09:31:41 by bworrawa          #+#    #+#             */
+/*   Updated: 2024/08/27 15:04:04 by bworrawa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-int	ft_putlchar(int c)
+char	*ft_strdup(const char *s1)
 {
-	return (write(1, &c, 1));
+	size_t	len;
+	char	*ret;
+
+	len = ft_strlen(s1) + 1;
+	ret = malloc(sizeof (char) * len);
+	ft_memcpy(ret, s1, len);
+	return (ret);
 }

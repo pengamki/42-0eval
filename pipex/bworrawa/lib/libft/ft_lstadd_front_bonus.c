@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putlchar.c                                      :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                :wq
+  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bworrawa <bworrawa@student.42bangkok.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/29 15:16:10 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/28 15:49:35 by pengamki         ###   ########.fr       */
+/*   Created: 2024/08/26 10:34:54 by bworrawa          #+#    #+#             */
+/*   Updated: 2024/08/26 10:35:09 by bworrawa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-int	ft_putlchar(int c)
+void	ft_lstadd_front(t_list **alst, t_list *new)
 {
-	return (write(1, &c, 1));
+	if (!alst || !new)
+		return ;
+	new->next = *alst;
+	*alst = new;
 }

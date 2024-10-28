@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putlchar.c                                      :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bworrawa <bworrawa@student.42bangkok.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/29 15:16:10 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/28 15:49:35 by pengamki         ###   ########.fr       */
+/*   Created: 2024/08/28 11:28:04 by bworrawa          #+#    #+#             */
+/*   Updated: 2024/08/28 11:58:04 by bworrawa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-int	ft_putlchar(int c)
+void	ft_putendl_fd(char *s, int fd)
 {
-	return (write(1, &c, 1));
+	write(fd, s, ft_strlen(s));
+	write(fd, &"\n", 1);
 }

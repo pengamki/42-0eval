@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putlchar.c                                      :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bworrawa <bworrawa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/29 15:16:10 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/28 15:49:35 by pengamki         ###   ########.fr       */
+/*   Created: 2024/08/26 09:25:29 by bworrawa          #+#    #+#             */
+/*   Updated: 2024/08/26 19:51:10 by bworrawa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-int	ft_putlchar(int c)
+char	*ft_strchr(const char *s, int c)
 {
-	return (write(1, &c, 1));
+	size_t		i;
+	char		ch;
+
+	i = 0;
+	ch = (char) c;
+	while (s[i])
+	{
+		if (s[i] == ch)
+			return ((char *) &s[i]);
+		i++;
+	}
+	if (s[i] == ch)
+		return ((char *) &s[i]);
+	return (NULL);
 }

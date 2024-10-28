@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putlchar.c                                      :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bworrawa <bworrawa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/29 15:16:10 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/28 15:49:35 by pengamki         ###   ########.fr       */
+/*   Created: 2024/08/26 09:26:24 by bworrawa          #+#    #+#             */
+/*   Updated: 2024/08/28 09:33:50 by bworrawa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-int	ft_putlchar(int c)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	return (write(1, &c, 1));
+	while (n > 0)
+	{
+		if ((unsigned char) *s1 != (unsigned char) *s2)
+			return ((unsigned char) *s1 - (unsigned char) *s2);
+		n--;
+		s1++;
+		s2++;
+	}
+	return (0);
 }

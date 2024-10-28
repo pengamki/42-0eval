@@ -3,30 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bworrawa <bworrawa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/29 12:37:15 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/28 15:49:57 by pengamki         ###   ########.fr       */
+/*   Created: 2024/08/31 16:45:24 by bworrawa          #+#    #+#             */
+/*   Updated: 2024/10/04 16:12:12 by bworrawa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <stdarg.h>
 # include <unistd.h>
+# include <stdlib.h>
+# include <stdarg.h>
+# include <stdio.h>
 
-// Main functions
-int	ft_printf(const char *s, ...);
-int	ft_option(char c, va_list *ap);
-int	ft_format(const char *s, va_list *ap);
+# define CAP_HEX_CHR "0123456789ABCDEF"
+# define LC_HEX_CHR "0123456789abcdef"
+# define DEC_CHR "0123456789"
 
-// Helper functions
-int	ft_putlptr(unsigned long ptr);
-int	ft_putptr(unsigned long nbr);
-int	ft_putlchar(int c);
-int	ft_putlstr(char *s);
-int	ft_putlnbr(int nbr);
-int	ft_putlnbrbase(unsigned int nbr, char *base, unsigned int len);
+size_t	ft_strlen(const char *s);
+int		ft_printf(const char *s, ...);
+int		ft_putchar(char c);
+int		ft_putnbr_base(unsigned long long int num, char *base);
+int		ft_putnbr(int num);
+int		ft_putptr(void *ptr);
+int		ft_putstr(char *s);
 
 #endif
