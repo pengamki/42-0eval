@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pengamki <pengamki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 20:55:21 by srussame          #+#    #+#             */
-/*   Updated: 2024/09/20 20:55:22 by srussame         ###   ########.fr       */
+/*   Updated: 2024/11/09 15:50:19 by pengamki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t		check_newline(char *buffer);
-static int	check_leftover_sub1(char **leftover, t_gnl_data *gnl, \
+size_t	check_newline(char *buffer);
+int		check_leftover_sub1(char **leftover, t_gnl_data *gnl,
 			t_check_leftover_data *cl);
-int			put_leftover(t_goread_data *gr, char **leftover,
-				t_gnl_data *gnl);
+int		put_leftover(t_goread_data *gr, char **leftover, t_gnl_data *gnl);
 
 int	check_leftover(char **leftover, t_gnl_data *gnl)
 {
@@ -43,8 +42,8 @@ int	check_leftover(char **leftover, t_gnl_data *gnl)
 	return (check_leftover_sub1(leftover, gnl, &cl));
 }
 
-static int	check_leftover_sub1(char **leftover, t_gnl_data *gnl, \
-			t_check_leftover_data *cl)
+int	check_leftover_sub1(char **leftover, t_gnl_data *gnl,
+		t_check_leftover_data *cl)
 {
 	gnl->return_line = (char *)malloc(cl->old_l - cl->new_l + 1);
 	if (!gnl->return_line)
@@ -67,8 +66,7 @@ static int	check_leftover_sub1(char **leftover, t_gnl_data *gnl, \
 	return (2);
 }
 
-int	put_leftover(t_goread_data *gr, char **leftover,
-			t_gnl_data *gnl)
+int	put_leftover(t_goread_data *gr, char **leftover, t_gnl_data *gnl)
 {
 	t_putleft_data	pl;
 
@@ -81,8 +79,7 @@ int	put_leftover(t_goread_data *gr, char **leftover,
 		return (0);
 	pl.new_i = 0;
 	while (pl.new_i < pl.new_len)
-		(*leftover)[pl.new_i++] \
-		= gnl->read_buffer[gr->checkline_ret++];
+		(*leftover)[pl.new_i++] = gnl->read_buffer[gr->checkline_ret++];
 	(*leftover)[pl.new_i] = '\0';
 	return (1);
 }

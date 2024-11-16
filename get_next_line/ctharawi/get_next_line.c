@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctharawi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pengamki <pengamki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/03 12:06:10 by ctharawi          #+#    #+#             */
-/*   Updated: 2024/11/09 13:52:29 by ctharawi         ###   ########.fr       */
+/*   Created: 2024/11/09 21:34:04 by pengamki          #+#    #+#             */
+/*   Updated: 2024/11/09 23:43:49 by pengamki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,13 @@ static void	ft_gettail(t_list **lst)
 	int		i;
 	int		j;
 
-	j = 0;
 	tmp = ft_lstlast(*lst);
 	if (!tmp)
 		return ;
 	str = tmp->content;
 	j = tmp->len;
 	tmp->content = NULL;
-	ft_clear(lst);
+	ft_lstclear_content(lst);
 	i = 0;
 	if (str[j] != '\0')
 	{
@@ -41,43 +40,43 @@ static void	ft_gettail(t_list **lst)
 		free(str);
 }
 
-static void	ft_str_node_join(t_list *lst, char **str)
+void	ft_lst_strcat(t_list *lst, char **str)
 {
+	t_list	*node_ptr;
+	int		bsize;
 	int		i;
-	int		j;
-	t_list	*ptr;
 
-	ptr = lst;
-	j = 0;
-	while (ptr)
+	node_ptr = lst;
+	bsize = 0;
+	while (node_ptr)
 	{
-		j += ptr->len;
-		ptr = ptr->next;
+		bsize += node_ptr->len;
+		node_ptr = node_ptr->next;
 	}
-	if (!j)
+	if (!bsize)
 		return ;
-	*str = (char *)malloc(sizeof(char) + (j + 1));
-	if (!str)
+	*str = (char *)malloc(sizeof(char) * (bsize + 1));
+	if (!*str)
 		return ;
-	j = 0;
+	bsize = 0;
 	while (lst && lst->content)
 	{
 		i = 0;
-		while (lst->content[i] && i < lst->len)
-			(*str)[j++] = lst->content[i++];
+		while (i < lst->len)
+			(*str)[bsize++] = lst->content[i++];
 		lst = lst->next;
 	}
-	(*str)[j] = '\0';
+	(*str)[bsize] = '\0';
 }
 
-static int	ft_isnl(t_list *node)
+int	ft_no_nextline_found(t_list *node)
 {
 	int	i;
 
-	i = 0;
 	node = ft_lstlast(node);
 	if (!node)
 		return (1);
+	i = 0;
 	while (node->content[i])
 	{
 		if (node->content[i] == '\n')
@@ -91,27 +90,25 @@ static int	ft_isnl(t_list *node)
 	return (1);
 }
 
-static void	ft_create(t_list **lst, int fd)
+void	ft_buffer_linkedlist(t_list **lst, int fd)
 {
-	int		read_byte;
-	char	*str;
-	t_list	*new_node;
+	int			read_done;
+	t_list		*node;
 
-	read_byte = 0;
-	while (ft_isnl(*lst))
+	read_done = 0;
+	while (ft_no_nextline_found(*lst))
 	{
-		str = NULL;
-		new_node = ft_lstnew(str);
-		new_node->content = ft_calloc(sizeof(*str), (BUFFER_SIZE + 1));
-		read_byte = read(fd, new_node->content, BUFFER_SIZE);
-		if (read_byte <= 0)
+		node = ft_lstnew(NULL);
+		node->content = ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
+		read_done = read(fd, node->content, BUFFER_SIZE);
+		if (read_done <= 0)
 		{
-			free(new_node->content);
-			free(new_node);
+			free(node->content);
+			free(node);
 			return ;
 		}
-		new_node->content[BUFFER_SIZE] = '\0';
-		ft_lstadd_back(lst, new_node);
+		node->content[BUFFER_SIZE] = '\0';
+		ft_lstadd_back(lst, node);
 	}
 }
 
@@ -123,10 +120,10 @@ char	*get_next_line(int fd)
 	str = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	ft_create(&lst, fd);
+	ft_buffer_linkedlist(&lst, fd);
 	if (!lst)
 		return (NULL);
-	ft_str_node_join(lst, &str);
+	ft_lst_strcat(lst, &str);
 	ft_gettail(&lst);
 	return (str);
 }

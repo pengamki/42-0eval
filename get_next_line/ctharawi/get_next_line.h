@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctharawi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pengamki <pengamki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/03 14:34:38 by ctharawi          #+#    #+#             */
-/*   Updated: 2024/11/04 14:30:48 by ctharawi         ###   ########.fr       */
+/*   Created: 2024/11/09 21:34:41 by pengamki          #+#    #+#             */
+/*   Updated: 2024/11/09 23:21:09 by pengamki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,15 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-t_list	*ft_lstlast(t_list *node);
-t_list	*ft_lstnew(char *str);
-void	ft_lstadd_back(t_list **lst, t_list *node);
-void	ft_clear(t_list **lst);
-void	*ft_calloc(size_t n, size_t size);
-char	*get_next_line(int fd);
+// libft
+t_list				*ft_lstlast(t_list *lst);
+t_list				*ft_lstnew(void *content);
+void				ft_lstadd_back(t_list **lst, t_list *new);
+void				*ft_calloc(size_t nmemb, size_t size);
+
+void				ft_lstclear_content(t_list **lst);
+char				*get_next_line(int fd);
+void				ft_lst_strcat(t_list *lst, char **str);
+void				ft_buffer_linkedlist(t_list **lst, int fd);
 
 #endif

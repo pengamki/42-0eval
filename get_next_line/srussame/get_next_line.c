@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srussame <srussame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pengamki <pengamki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 20:54:51 by srussame          #+#    #+#             */
-/*   Updated: 2024/09/21 03:21:53 by srussame         ###   ########.fr       */
+/*   Updated: 2024/11/09 18:19:12 by pengamki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int	buffjoin(char **dest, char *src);
-static int	go_read(int fd, t_gnl_data *gnl, char **leftover);
-static int	go_read_loop(int fd, t_goread_data *gr, t_gnl_data *gnl);
-static void	buffjoin_sub1(char **dest, char *src, t_buffjoin_data *bj);
+int		buffjoin(char **dest, char *src);
+int		go_read(int fd, t_gnl_data *gnl, char **leftover);
+int		go_read_loop(int fd, t_goread_data *gr, t_gnl_data *gnl);
+void	buffjoin_sub1(char **dest, char *src, t_buffjoin_data *bj);
 
 char	*get_next_line(int fd)
 {
@@ -45,7 +45,7 @@ char	*get_next_line(int fd)
 	return (gnl.return_line);
 }
 
-static int	go_read(int fd, t_gnl_data *gnl, char **leftover)
+int	go_read(int fd, t_gnl_data *gnl, char **leftover)
 {
 	t_goread_data	gr;
 
@@ -71,7 +71,7 @@ static int	go_read(int fd, t_gnl_data *gnl, char **leftover)
 	return (put_leftover(&gr, leftover, gnl));
 }
 
-static int	go_read_loop(int fd, t_goread_data *gr, t_gnl_data *gnl)
+int	go_read_loop(int fd, t_goread_data *gr, t_gnl_data *gnl)
 {
 	gnl->read_buffer[gr->read_ret] = 0;
 	gr->checkline_ret = check_newline(gnl->read_buffer);
@@ -88,7 +88,7 @@ static int	go_read_loop(int fd, t_goread_data *gr, t_gnl_data *gnl)
 	return (1);
 }
 
-static int	buffjoin(char **dest, char *src)
+int	buffjoin(char **dest, char *src)
 {
 	t_buffjoin_data	bj;
 
@@ -112,7 +112,7 @@ static int	buffjoin(char **dest, char *src)
 	return (1);
 }
 
-static void	buffjoin_sub1(char **dest, char *src, t_buffjoin_data *bj)
+void	buffjoin_sub1(char **dest, char *src, t_buffjoin_data *bj)
 {
 	bj->old_len = 0;
 	bj->new_len = 0;
@@ -133,7 +133,7 @@ static void	buffjoin_sub1(char **dest, char *src, t_buffjoin_data *bj)
 //#include <stdio.h>
 //#include <fcntl.h>
 //
-//void	print_line(char *line)
+// void	print_line(char *line)
 //{
 //	size_t	i;
 //
@@ -154,7 +154,7 @@ static void	buffjoin_sub1(char **dest, char *src, t_buffjoin_data *bj)
 //		write(1, "\\0\n", 3);
 //}
 //
-//int	main(void)
+// int	main(void)
 //{
 //	char	*line;
 //	int		fd;
